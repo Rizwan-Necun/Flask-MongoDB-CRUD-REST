@@ -5,12 +5,16 @@ from bson.json_util import ObjectId
 from flask import Flask, Response, jsonify, request
 
 app = Flask(__name__)
+connection_string = "mongodb://root:root@localhost:27017/?authSource=admin"
+app.config['MONGO_URI'] = "mongodb://root:root@localhost:27017/?authSource=admin"
 
 # Use a try-except block to handle connection errors more gracefully
 try:
     mongo = pymongo.MongoClient(
         host='localhost',
         port=27017,
+        username='root',
+        password='root',
         serverSelectionTimeoutMS=1000
     )
     db = mongo.company
